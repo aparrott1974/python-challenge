@@ -12,7 +12,7 @@
 
 # Import Dependencies
 import pandas as pd
-import os
+import numpy
 
 
 # In[3]:
@@ -68,29 +68,28 @@ avg_chg = mo_chg.mean()
 print("Average Change: $" + str(int(avg_chg)))
 
 
-# In[9]:
+# In[40]:
 
 
 # The greatest increase in revenue (date and amount) over the entire period
 
-max_rev = budget_data_df["Revenue"].max()
-max_rev_row = budget_data_df.loc[budget_data_df["Revenue"] == max_rev,:]
-print("Greatest Increase in Revenue: " + max_rev_row.iloc[0]['Date'] + " $(" + str(max_rev) + ")")
+max_rev = mo_chg["Revenue"].max()  # this gives me the greatest increas
+
+# get the date of when the greatest increase happened
+
+max_rev_date = mo_chg.index[mo_chg["Revenue"] == max_rev][0]
+
+print("Greatest Increase in Revenue: " + str(max_rev_date) + " $(" + str(max_rev) + ")")
 
 
-# In[10]:
+# In[42]:
 
 
 # The greatest decrease in revenue (date and amount) over the entire period
 
-min_rev = budget_data_df["Revenue"].min()
-min_rev_row = budget_data_df.loc[budget_data_df["Revenue"] == min_rev,:]
+min_rev = mo_chg["Revenue"].min()  # this gives me the greatest decrease
 
-print("Greatest Decrease in Revenue: " + min_rev_row.iloc[0]['Date'] + " $(" + str(min_rev)+ ")")
+min_rev_date = mo_chg.index[mo_chg["Revenue"] == min_rev][0]
 
-
-# In[12]:
-
-
-#jupyter nbconvert --to script 'pybank_main.ipynb'
+print("Greatest Decrease in Revenue: " + str(min_rev_date) + " $(" + str(min_rev)+ ")")
 
